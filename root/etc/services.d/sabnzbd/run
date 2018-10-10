@@ -1,5 +1,11 @@
 #!/usr/bin/with-contenv bash
 
+if [ -f /mnt/sabnzbd.ini ]; then
+    echo "mounting point ok!"
+    rm /config/sabnzbd.ini
+    ln -s /mnt/sabnzbd.ini /config/sabnzbd.ini
+fi
+
 exec \
 	s6-setuidgid abc /usr/bin/sabnzbdplus \
 	--config-file /config --server 0.0.0.0:8080
